@@ -1,0 +1,21 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Categoria: {{ category.name }}{% endblock %}
+
+{% block content %}
+<h2 class='fw-bold text-dark mb-4'>Categoria: <span class='text-primary'>{{ category.name }}</span></h2>
+<div class='row'>
+    {% for article in articles %}
+        <div class='col-md-6 mb-4'>
+            {% include 'news/_article_card.html' with article=article %}
+        </div>
+    {% empty %}
+        <div class='col-12'>
+            <div class='alert alert-info text-center shadow-sm'>
+                No hay noticias registradas bajo esta categoria.
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<a href='{% url "news:home" %}' class='btn btn-outline-secondary'>← Volver a Inicio</a>
+{% endblock %}

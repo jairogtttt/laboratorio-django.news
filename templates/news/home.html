@@ -1,0 +1,21 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Portada - Portal de Noticias{% endblock %}
+
+{% block content %}
+<h2 class='mb-4 text-primary fw-bold'>Ultimas Noticias</h2>
+<div class='row'>
+    {% for article in articles %}
+        <div class='col-md-6 mb-4'>
+            {% include 'news/_article_card.html' with article=article %}
+        </div>
+    {% empty %}
+        <div class='col-12'>
+            <div class='alert alert-warning text-center shadow-sm'>
+                <h5>No hay noticias publicadas en este momento.</h5>
+                <p class='mb-0'>Ingresa al panel de administracion para registrar nuevos articulos.</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

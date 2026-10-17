@@ -1,0 +1,30 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<article class='bg-white p-4 rounded shadow-sm border mb-4'>
+    <div class='mb-3'>
+        {% for cat in article.categories.all %}
+            <a href='{% url "news:category_articles" cat.slug %}' class='badge bg-info text-dark text-decoration-none me-1'>
+                {{ cat.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <h1 class='fw-bold mb-3'>{{ article.title }}</h1>
+    <div class='text-muted small mb-4 border-bottom pb-2'>
+        Por <strong>{{ article.author.name }}</strong> • {{ article.published_at|date:"d \d\e F \d\e Y" }}
+    </div>
+
+    {% if article.image %}
+        <img src='{{ article.image.url }}' class='img-fluid rounded mb-4 w-100' style='max-height: 400px; object-fit: cover;'>
+    {% endif %}
+
+    <div class='lead mb-4 text-secondary'>{{ article.summary }}</div>
+    <hr>
+    <div class='article-body fs-5'>{{ article.body }}</div>
+
+    <a href='{% url "news:home" %}' class='btn btn-outline-secondary mt-4'>← Volver a Inicio</a>
+</article>
+{% endblock %}
